@@ -3,11 +3,11 @@ speakeasyVersion: latest
 sources:
     NeuralSeek:
         inputs:
-            - location: ../src/core/system/api/api.json
+            - location: ./api.json
         overlays:
             - location: .speakeasy/speakeasy-modifications-overlay.yaml
         registry:
-            location: registry.speakeasyapi.dev/neuralseek/sdk/neural-seek
+            location: registry.speakeasyapi.dev/neuralseek/sdk/neuralseek
 targets:
     neuralseek:
         target: python
