@@ -50,7 +50,7 @@ The SDK can be installed with either *pip* or *poetry* package managers.
 *PIP* is the default package installer for Python, enabling easy installation and management of packages from PyPI via the command line.
 
 ```bash
-pip install git+https://github.com/CerebralBlue/neuralseek-python-sdk.git
+pip install neuralseek
 ```
 
 ### Poetry
@@ -58,7 +58,7 @@ pip install git+https://github.com/CerebralBlue/neuralseek-python-sdk.git
 *Poetry* is a modern tool that simplifies dependency management and package publishing by using a single `pyproject.toml` file to handle project metadata and dependencies.
 
 ```bash
-poetry add git+https://github.com/CerebralBlue/neuralseek-python-sdk.git
+poetry add neuralseek
 ```
 <!-- End SDK Installation [installation] -->
 
