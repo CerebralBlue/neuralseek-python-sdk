@@ -12,6 +12,9 @@ targets:
     neuralseek:
         target: python
         source: NeuralSeek
+        publish:
+            pypi:
+                token: $pypi_token
         codeSamples:
             registry:
                 location: registry.speakeasyapi.dev/neuralseek/sdk/neuralseek-python-code-samples
