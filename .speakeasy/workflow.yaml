@@ -14,5 +14,5 @@ targets:
         source: NeuralSeek
         codeSamples:
             registry:
-                location: registry.speakeasyapi.dev/neuralseek/sdk/neural-seek-python-code-samples
+                location: registry.speakeasyapi.dev/neuralseek/sdk/neuralseek-python-code-samples
             blocking: false
