@@ -5,10 +5,11 @@ management:
   docVersion: 1.0.1
   speakeasyVersion: 1.448.2
   generationVersion: 2.467.4
-  releaseVersion: 0.1.2
-  configChecksum: ef210d580d41eb07b65c1093fbc8ee3c
+  releaseVersion: 1.0.0
+  configChecksum: f043cc16170d33e04891414952de6941
   repoURL: https://github.com/CerebralBlue/neuralseek-python-sdk.git
   installationURL: https://github.com/CerebralBlue/neuralseek-python-sdk.git
+  published: true
 features:
   python:
     additionalDependencies: 1.0.0

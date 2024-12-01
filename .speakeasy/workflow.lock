@@ -2,20 +2,20 @@ speakeasyVersion: 1.448.2
 sources:
     NeuralSeek:
         sourceNamespace: neuralseek
-        sourceRevisionDigest: sha256:d81b8712f7184f66896ec760c60424e522865341fd3bffee45d91325e71607b8
+        sourceRevisionDigest: sha256:c91b6b14e1b6084df9cd9769e0115101beb33538ab46466723451a1036adc0c6
         sourceBlobDigest: sha256:7c9eba212ae84f98855cb754977cfd900a32d9e94a475b7e092c99ab1910844e
         tags:
             - latest
-            - speakeasy-sdk-regen-1733081408
+            - speakeasy-sdk-regen-1733085764
             - 1.0.1
 targets:
     neuralseek:
         source: NeuralSeek
         sourceNamespace: neuralseek
-        sourceRevisionDigest: sha256:d81b8712f7184f66896ec760c60424e522865341fd3bffee45d91325e71607b8
+        sourceRevisionDigest: sha256:c91b6b14e1b6084df9cd9769e0115101beb33538ab46466723451a1036adc0c6
         sourceBlobDigest: sha256:7c9eba212ae84f98855cb754977cfd900a32d9e94a475b7e092c99ab1910844e
-        codeSamplesNamespace: neural-seek-python-code-samples
-        codeSamplesRevisionDigest: sha256:bf86361682e04b80d48460be9b37e4a8a22d02c0c6e1be6bef0ef47d3ce3f95c
+        codeSamplesNamespace: neuralseek-python-code-samples
+        codeSamplesRevisionDigest: sha256:b069a14d2242fab6ea6cd049b15dee4466d3999a244e54b5b7512d3d6e99b658
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -31,7 +31,10 @@ workflow:
         neuralseek:
             target: python
             source: NeuralSeek
+            publish:
+                pypi:
+                    token: $pypi_token
             codeSamples:
                 registry:
-                    location: registry.speakeasyapi.dev/neuralseek/sdk/neural-seek-python-code-samples
+                    location: registry.speakeasyapi.dev/neuralseek/sdk/neuralseek-python-code-samples
                 blocking: false
