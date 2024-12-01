@@ -1,0 +1,13 @@
+# Passages
+
+
+## Fields
+
+| Field                                                                           | Type                                                                            | Required                                                                        | Description                                                                     |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `passage`                                                                       | *Optional[str]*                                                                 | :heavy_minus_sign:                                                              | The passage text, summarized to the length set by sourceResultsSummaryLength    |
+| `id`                                                                            | *Optional[str]*                                                                 | :heavy_minus_sign:                                                              | The id of the source document in the KB.                                        |
+| `score`                                                                         | *Optional[int]*                                                                 | :heavy_minus_sign:                                                              | The score of the passage.                                                       |
+| `url`                                                                           | *Optional[str]*                                                                 | :heavy_minus_sign:                                                              | The URL (if available) of the source document.                                  |
+| `document`                                                                      | *Optional[str]*                                                                 | :heavy_minus_sign:                                                              | The name of the source document.                                                |
+| `train`                                                                         | *Optional[str]*                                                                 | :heavy_minus_sign:                                                              | The training token for the document. Use this when calling the /train endpoint. |
