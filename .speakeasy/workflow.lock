@@ -1,0 +1,36 @@
+speakeasyVersion: 1.448.2
+sources:
+    NeuralSeek:
+        sourceNamespace: neural-seek
+        sourceRevisionDigest: sha256:c1ecb2ae997a0711cd7c9d99483713bb2a91626aef9aaaeb35bc063d13129095
+        sourceBlobDigest: sha256:4d7b53346815e92ea67f493e3f9babb8b4d26b92b86ecec122e6b98b8db589b2
+        tags:
+            - latest
+            - 1.0.1
+targets:
+    neuralseek:
+        source: NeuralSeek
+        sourceNamespace: neural-seek
+        sourceRevisionDigest: sha256:c1ecb2ae997a0711cd7c9d99483713bb2a91626aef9aaaeb35bc063d13129095
+        sourceBlobDigest: sha256:4d7b53346815e92ea67f493e3f9babb8b4d26b92b86ecec122e6b98b8db589b2
+        codeSamplesNamespace: neural-seek-python-code-samples
+        codeSamplesRevisionDigest: sha256:107f5da7ec7387954a4c77b602cd91047cfb464be18a729e0407981a4e93d6dd
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        NeuralSeek:
+            inputs:
+                - location: ../src/core/system/api/api.json
+            overlays:
+                - location: .speakeasy/speakeasy-modifications-overlay.yaml
+            registry:
+                location: registry.speakeasyapi.dev/neuralseek/sdk/neural-seek
+    targets:
+        neuralseek:
+            target: python
+            source: NeuralSeek
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/neuralseek/sdk/neural-seek-python-code-samples
+                blocking: false

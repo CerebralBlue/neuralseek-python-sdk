@@ -1,0 +1,238 @@
+overlay: 1.0.0
+info:
+  title: Speakeasy Modifications
+  version: 0.0.2
+  x-speakeasy-metadata:
+    after: ""
+    before: ""
+    type: speakeasy-modifications
+actions:
+  - target: $["paths"]["/getTestResults"]["get"]
+    update:
+      x-speakeasy-group: testResults
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Test Results.getTestResults()
+      after: sdk.testResults.get()
+      reviewed_at: 1733078914268
+      created_at: 1733078880418
+  - target: $["paths"]["/test"]["get"]
+    update:
+      x-speakeasy-group: serviceTest
+      x-speakeasy-name-override: check
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Service Test.servicetest()
+      after: sdk.serviceTest.check()
+      reviewed_at: 1733078914268
+      created_at: 1733078880418
+  - target: $["paths"]["/test"]["post"]
+    update:
+      x-speakeasy-group: testQuestions
+      x-speakeasy-name-override: upload
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Test Questions.test()
+      after: sdk.testQuestions.upload()
+      reviewed_at: 1733078914268
+      created_at: 1733078880418
+  - target: $["paths"]["/translate"]["post"]
+    update:
+      x-speakeasy-name-override: execute
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Translate.Translate()
+      after: sdk.translate.execute()
+      reviewed_at: 1733078914268
+      created_at: 1733078880418
+  - target: $["paths"]["/user_data"]["delete"]
+    update:
+      x-speakeasy-group: userData
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.User Data.deleteUserData()
+      after: sdk.userData.delete()
+      reviewed_at: 1733078914268
+      created_at: 1733078880418
+  - target: $["paths"]["/translateGlossary"]["post"]
+    update:
+      x-speakeasy-group: translationGlossary
+      x-speakeasy-name-override: add
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Translation Glossary.translateGlossary()
+      after: sdk.translationGlossary.add()
+      reviewed_at: 1733078914268
+      created_at: 1733078880418
+  - target: $["paths"]["/pii"]["post"]
+    update:
+      x-speakeasy-group: findPII
+      x-speakeasy-name-override: detect
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Find PII.pii()
+      after: sdk.findPII.detect()
+      reviewed_at: 1733078914268
+      created_at: 1733078880418
+  - target: $["paths"]["/extract"]["post"]
+    update:
+      x-speakeasy-group: extractEntities
+      x-speakeasy-name-override: post
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Extract Entities.ExtractEntities()
+      after: sdk.extractEntities.post()
+      reviewed_at: 1733078914268
+      created_at: 1733078880418
+  - target: $["paths"]["/categorize"]["post"]
+    update:
+      x-speakeasy-name-override: execute
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Categorize.categorize()
+      after: sdk.categorize.execute()
+      reviewed_at: 1733078914268
+      created_at: 1733078880418
+  - target: $["paths"]["/identify"]["post"]
+    update:
+      x-speakeasy-group: identifyLanguage
+      x-speakeasy-name-override: identify
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Identify Language.IdentifyLanguage()
+      after: sdk.identifyLanguage.identify()
+      reviewed_at: 1733078914268
+      created_at: 1733078880418
+  - target: $["paths"]["/logs"]["post"]
+    update:
+      x-speakeasy-name-override: retrieve
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Logs.logs()
+      after: sdk.logs.retrieve()
+      reviewed_at: 1733078914268
+      created_at: 1733078880418
+  - target: $["paths"]["/otp"]["post"]
+    update:
+      x-speakeasy-group: oneTimePassword
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.One Time Password.otp()
+      after: sdk.oneTimePassword.create()
+      reviewed_at: 1733078914268
+      created_at: 1733078880418
+  - target: $["paths"]["/translateGlossary"]["delete"]
+    update:
+      x-speakeasy-group: translationGlossary
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Translation Glossary.deleteTranslateGlossary()
+      after: sdk.translationGlossary.delete()
+      reviewed_at: 1733078914268
+      created_at: 1733078880418
+  - target: $["paths"]["/seek_stream"]["post"]
+    update:
+      x-speakeasy-name-override: stream
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Seek.seek_stream()
+      after: sdk.seek.stream()
+      reviewed_at: 1733078914268
+      created_at: 1733078880418
+  - target: $["paths"]["/identify-single"]["post"]
+    update:
+      x-speakeasy-group: identifyLanguageJSON
+      x-speakeasy-name-override: identify
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Identify Language (JSON).IdentifyLanguageJSON()
+      after: sdk.identifyLanguageJSON.identify()
+      reviewed_at: 1733078914268
+      created_at: 1733078880418
+  - target: $["paths"]["/seek"]["post"]
+    update:
+      x-speakeasy-name-override: execute
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Seek.seek()
+      after: sdk.seek.execute()
+      reviewed_at: 1733078914268
+      created_at: 1733078880418
+  - target: $["paths"]["/score"]["post"]
+    update:
+      x-speakeasy-name-override: post
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Score.score()
+      after: sdk.score.post()
+      reviewed_at: 1733078914268
+      created_at: 1733078880418
+  - target: $["paths"]["/maistro_stream"]["post"]
+    update:
+      x-speakeasy-name-override: stream
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.maistro.maistro_stream()
+      after: sdk.maistro.stream()
+      reviewed_at: 1733078914268
+      created_at: 1733078880418
+  - target: $["paths"]["/answerRatings"]["post"]
+    update:
+      x-speakeasy-group: answerRatings
+      x-speakeasy-name-override: getAverage
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Answer Ratings.answerRatings()
+      after: sdk.answerRatings.getAverage()
+      reviewed_at: 1733078914268
+      created_at: 1733078880418
+  - target: $["paths"]["/train"]["post"]
+    update:
+      x-speakeasy-name-override: post
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Train.train()
+      after: sdk.train.post()
+      reviewed_at: 1733078914268
+      created_at: 1733078880418
+  - target: $["paths"]["/analytics"]["post"]
+    update:
+      x-speakeasy-name-override: retrieve
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Analytics.analytics()
+      after: sdk.analytics.retrieve()
+      reviewed_at: 1733078914268
+      created_at: 1733078880418
+  - target: $["paths"]["/keycheck"]["post"]
+    update:
+      x-speakeasy-group: keyCheck
+      x-speakeasy-name-override: post
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Key Check.keycheck()
+      after: sdk.keyCheck.post()
+      reviewed_at: 1733078914268
+      created_at: 1733078880418
+  - target: $["paths"]["/maistro"]["post"]
+    update:
+      x-speakeasy-name-override: execute
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.maistro.maistro()
+      after: sdk.maistro.execute()
+      reviewed_at: 1733078914268
+      created_at: 1733078880418
+  - target: $["paths"]["/rate"]["post"]
+    update:
+      x-speakeasy-name-override: submit
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Rate.rate()
+      after: sdk.rate.submit()
+      reviewed_at: 1733078914268
+      created_at: 1733078880418
