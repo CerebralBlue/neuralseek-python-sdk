@@ -371,8 +371,8 @@
     "/maistro" : {
       "post" : {
         "tags" : [ "maistro" ],
-        "summary" : "Run mAistro NTL or template",
-        "description" : "Freeform prompting using NeuralSeek Template Language",
+        "summary" : "Run mAistro NTL or agent",
+        "description" : "Freeform prompting using NeuralSeek Template Language or a saved agent",
         "operationId" : "maistro",
         "parameters" : [ {
           "in" : "query",
@@ -385,13 +385,13 @@
           "description" : "Find variables based on post body.  Return all variables as the base presponse body, overriding the normal NS schema. All POST options will be ignored. Set this to a string value of 'true' to activate"
         }, {
           "in" : "query",
-          "name" : "templatename",
+          "name" : "overrideagent",
           "schema" : {
             "type" : "string",
             "default" : ""
           },
           "required" : false,
-          "description" : "If using overrideSchema you must pass your template name here. All other POST options will be ignored."
+          "description" : "If using overrideSchema you must pass your agent name here. All other POST options will be ignored."
         }, {
           "in" : "query",
           "name" : "debug",
@@ -413,12 +413,12 @@
                   "ntl" : {
                     "type" : "string",
                     "default" : "",
-                    "description" : "The NTL script to evaluate.  Include either this or templateName - not both"
+                    "description" : "The NTL script to evaluate.  Include either this or agent - not both"
                   },
-                  "templateName" : {
+                  "agent" : {
                     "type" : "string",
                     "default" : "",
-                    "description" : "The templateName to use. Include either this or input"
+                    "description" : "The agent to use. Include either this or NTL"
                   },
                   "params" : {
                     "type" : "array",
@@ -629,8 +629,8 @@
     "/maistro_stream" : {
       "post" : {
         "tags" : [ "maistro" ],
-        "summary" : "Stream mAIstro NTL or a template",
-        "description" : "Freeform prompting using NeuralSeek Template Language",
+        "summary" : "Stream mAIstro NTL or an agent",
+        "description" : "Freeform prompting using NeuralSeek Template Language or a saved agent",
         "operationId" : "maistro_stream",
         "requestBody" : {
           "description" : "The request object.",
@@ -643,12 +643,12 @@
                   "ntl" : {
                     "type" : "string",
                     "default" : "",
-                    "description" : "The NTL script to evaluate.  Include either this or templateName - not both"
+                    "description" : "The NTL script to evaluate.  Include either this or agent - not both"
                   },
-                  "templateName" : {
+                  "agent" : {
                     "type" : "string",
                     "default" : "",
-                    "description" : "The templateName to use. Include either this or input"
+                    "description" : "The agent to use. Include either this or NTL"
                   },
                   "params" : {
                     "type" : "array",
@@ -2102,7 +2102,7 @@
     }
   },
   "externalDocs" : {
-    "url" : "https://neuralseek.com/documentation",
+    "url" : "https://documentation.neuralseek.com",
     "description" : "Documentation"
   }
 }
