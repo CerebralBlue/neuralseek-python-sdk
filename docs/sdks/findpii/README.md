@@ -19,12 +19,12 @@ import os
 
 with Neuralseek(
     api_key=os.getenv("NEURALSEEK_API_KEY", ""),
-) as s:
-    res = s.find_pii.detect()
+) as n_client:
 
-    if res is not None:
-        # handle response
-        pass
+    res = n_client.find_pii.detect()
+
+    # Handle response
+    print(res)
 
 ```
 

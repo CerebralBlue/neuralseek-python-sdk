@@ -19,12 +19,12 @@ import os
 
 with Neuralseek(
     api_key=os.getenv("NEURALSEEK_API_KEY", ""),
-) as s:
-    res = s.answer_ratings.get_average()
+) as n_client:
 
-    if res is not None:
-        # handle response
-        pass
+    res = n_client.answer_ratings.get_average()
+
+    # Handle response
+    print(res)
 
 ```
 

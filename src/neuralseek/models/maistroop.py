@@ -140,9 +140,9 @@ class MaistroRequestBodyTypedDict(TypedDict):
     r"""The request object."""
 
     ntl: NotRequired[str]
-    r"""The NTL script to evaluate.  Include either this or templateName - not both"""
-    template_name: NotRequired[str]
-    r"""The templateName to use. Include either this or input"""
+    r"""The NTL script to evaluate.  Include either this or agent - not both"""
+    agent: NotRequired[str]
+    r"""The agent to use. Include either this or NTL"""
     params: NotRequired[List[MaistroParamsTypedDict]]
     r"""An array of parameters to use in evaluation of the NTL"""
     options: NotRequired[MaistroOptionsTypedDict]
@@ -153,10 +153,10 @@ class MaistroRequestBody(BaseModel):
     r"""The request object."""
 
     ntl: Optional[str] = ""
-    r"""The NTL script to evaluate.  Include either this or templateName - not both"""
+    r"""The NTL script to evaluate.  Include either this or agent - not both"""
 
-    template_name: Annotated[Optional[str], pydantic.Field(alias="templateName")] = ""
-    r"""The templateName to use. Include either this or input"""
+    agent: Optional[str] = ""
+    r"""The agent to use. Include either this or NTL"""
 
     params: Optional[List[MaistroParams]] = None
     r"""An array of parameters to use in evaluation of the NTL"""
@@ -170,8 +170,8 @@ class MaistroRequestTypedDict(TypedDict):
     r"""The request object."""
     overrideschema: NotRequired[str]
     r"""Find variables based on post body.  Return all variables as the base presponse body, overriding the normal NS schema. All POST options will be ignored. Set this to a string value of 'true' to activate"""
-    templatename: NotRequired[str]
-    r"""If using overrideSchema you must pass your template name here. All other POST options will be ignored."""
+    overrideagent: NotRequired[str]
+    r"""If using overrideSchema you must pass your agent name here. All other POST options will be ignored."""
     debug: NotRequired[str]
     r"""Include NS debug information in a field named 'neuralseek'. Set this to a string value of 'true' to activate"""
 
@@ -189,11 +189,11 @@ class MaistroRequest(BaseModel):
     ] = ""
     r"""Find variables based on post body.  Return all variables as the base presponse body, overriding the normal NS schema. All POST options will be ignored. Set this to a string value of 'true' to activate"""
 
-    templatename: Annotated[
+    overrideagent: Annotated[
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = ""
-    r"""If using overrideSchema you must pass your template name here. All other POST options will be ignored."""
+    r"""If using overrideSchema you must pass your agent name here. All other POST options will be ignored."""
 
     debug: Annotated[
         Optional[str],

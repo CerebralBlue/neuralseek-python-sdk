@@ -20,8 +20,9 @@ import os
 
 with Neuralseek(
     api_key=os.getenv("NEURALSEEK_API_KEY", ""),
-) as s:
-    s.test_questions.upload_multipart()
+) as n_client:
+
+    n_client.test_questions.upload_multipart()
 
     # Use the SDK ...
 
@@ -52,8 +53,9 @@ import os
 
 with Neuralseek(
     api_key=os.getenv("NEURALSEEK_API_KEY", ""),
-) as s:
-    s.test_questions.upload_json()
+) as n_client:
+
+    n_client.test_questions.upload_json()
 
     # Use the SDK ...
 

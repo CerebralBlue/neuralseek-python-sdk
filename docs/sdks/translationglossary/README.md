@@ -21,8 +21,9 @@ import os
 
 with Neuralseek(
     api_key=os.getenv("NEURALSEEK_API_KEY", ""),
-) as s:
-    s.translation_glossary.add_multipart()
+) as n_client:
+
+    n_client.translation_glossary.add_multipart()
 
     # Use the SDK ...
 
@@ -53,8 +54,9 @@ import os
 
 with Neuralseek(
     api_key=os.getenv("NEURALSEEK_API_KEY", ""),
-) as s:
-    s.translation_glossary.add_json()
+) as n_client:
+
+    n_client.translation_glossary.add_json()
 
     # Use the SDK ...
 
@@ -85,8 +87,9 @@ import os
 
 with Neuralseek(
     api_key=os.getenv("NEURALSEEK_API_KEY", ""),
-) as s:
-    s.translation_glossary.delete()
+) as n_client:
+
+    n_client.translation_glossary.delete()
 
     # Use the SDK ...
 

@@ -17,7 +17,7 @@ class FileTypedDict(TypedDict):
 
 class File(BaseModel):
     file_name: Annotated[
-        str, pydantic.Field(alias="file"), FieldMetadata(multipart=True)
+        str, pydantic.Field(alias="fileName"), FieldMetadata(multipart=True)
     ]
 
     content: Annotated[
@@ -43,7 +43,5 @@ class TranslateGlossaryMultipartRequestBody(BaseModel):
     r"""This endpoint will accept either a file upload (TMX or JSON), or a direct JSON payload following IBM's JSON file format https://cloud.ibm.com/docs/language-translator?topic=language-translator-customizing#json.  Only one file may be saved. Subsequent files will overwrite."""
 
     file: Annotated[
-        Optional[File],
-        pydantic.Field(alias=""),
-        FieldMetadata(multipart=MultipartFormMetadata(file=True)),
+        Optional[File], FieldMetadata(multipart=MultipartFormMetadata(file=True))
     ] = None
