@@ -19,14 +19,14 @@ import os
 
 with Neuralseek(
     api_key=os.getenv("NEURALSEEK_API_KEY", ""),
-) as s:
-    res = s.extract_entities.post(request={
+) as n_client:
+
+    res = n_client.extract_entities.post(request={
         "entities": "[{\"name\":\"dog-breeds\",\"description\":\"Types of Dogs\", \"format\":\"string\"}]",
     })
 
-    if res is not None:
-        # handle response
-        pass
+    # Handle response
+    print(res)
 
 ```
 

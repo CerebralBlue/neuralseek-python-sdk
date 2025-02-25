@@ -19,12 +19,12 @@ import os
 
 with Neuralseek(
     api_key=os.getenv("NEURALSEEK_API_KEY", ""),
-) as s:
-    res = s.identify_language_json.identify()
+) as n_client:
 
-    if res is not None:
-        # handle response
-        pass
+    res = n_client.identify_language_json.identify()
+
+    # Handle response
+    print(res)
 
 ```
 

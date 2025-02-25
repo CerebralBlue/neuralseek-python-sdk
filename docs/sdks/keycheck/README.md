@@ -19,8 +19,9 @@ import os
 
 with Neuralseek(
     api_key=os.getenv("NEURALSEEK_API_KEY", ""),
-) as s:
-    s.key_check.post()
+) as n_client:
+
+    n_client.key_check.post()
 
     # Use the SDK ...
 

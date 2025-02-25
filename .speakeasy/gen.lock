@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 2eec773c-33c1-45d3-abeb-b11624e27a59
 management:
-  docChecksum: bf3b8bbdbb169d9e109393ae2cb2b33d
+  docChecksum: 5ff887ea42943ce860aa83dd6c11510b
   docVersion: 1.0.1
-  speakeasyVersion: 1.448.2
-  generationVersion: 2.467.4
-  releaseVersion: 1.0.0
-  configChecksum: f043cc16170d33e04891414952de6941
+  speakeasyVersion: 1.504.0
+  generationVersion: 2.529.0
+  releaseVersion: 1.1.0
+  configChecksum: 267a4d5af6fdfe335b6e08929374d708
   repoURL: https://github.com/CerebralBlue/neuralseek-python-sdk.git
   installationURL: https://github.com/CerebralBlue/neuralseek-python-sdk.git
   published: true
@@ -14,23 +14,22 @@ features:
   python:
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.6.8
+    core: 5.12.1
     defaultEnabledRetries: 0.2.0
     devContainers: 3.0.0
     envVarSecurityUsage: 0.3.2
-    flattening: 3.1.0
-    globalSecurity: 3.0.2
+    flattening: 3.1.1
+    globalSecurity: 3.0.3
     globalSecurityCallbacks: 1.0.0
     globalSecurityFlattening: 1.0.0
-    globalServerURLs: 3.0.0
+    globalServerURLs: 3.1.0
     groups: 3.0.0
     methodArguments: 1.0.2
     multipartFileContentType: 1.0.0
-    nameOverrides: 3.0.0
+    nameOverrides: 3.0.1
     responseFormat: 1.0.1
     retries: 3.0.2
-    sdkHooks: 1.0.0
-    serverEvents: 1.0.6
+    sdkHooks: 1.0.1
     uploadStreams: 1.0.0
 generatedFiles:
   - .devcontainer/README.md
@@ -39,14 +38,12 @@ generatedFiles:
   - .gitattributes
   - .python-version
   - .vscode/settings.json
-  - CONTRIBUTING.md
   - USAGE.md
   - docs/models/analyticsrequestbody.md
   - docs/models/answerratingsrequestbody.md
   - docs/models/answerratingsresponsebody.md
   - docs/models/categorizerequestbody.md
   - docs/models/categorizeresponsebody.md
-  - docs/models/data.md
   - docs/models/deleteuserdatarequest.md
   - docs/models/extractedentities.md
   - docs/models/extractentitiesrequestbody.md
@@ -64,15 +61,6 @@ generatedFiles:
   - docs/models/maistrorequest.md
   - docs/models/maistrorequestbody.md
   - docs/models/maistroresponsebody.md
-  - docs/models/maistrostreamlastturn.md
-  - docs/models/maistrostreamoptions.md
-  - docs/models/maistrostreamparams.md
-  - docs/models/maistrostreamrender.md
-  - docs/models/maistrostreamrequestbody.md
-  - docs/models/maistrostreamresponsebody.md
-  - docs/models/maistrostreamvariables.md
-  - docs/models/maistrostreamvariablesexpanded.md
-  - docs/models/maistrostreamvars.md
   - docs/models/maistrovariables.md
   - docs/models/maistrovariablesexpanded.md
   - docs/models/metadata.md
@@ -90,15 +78,6 @@ generatedFiles:
   - docs/models/security.md
   - docs/models/seek.md
   - docs/models/seekresponse.md
-  - docs/models/seekstreamlastturn.md
-  - docs/models/seekstreammetadata.md
-  - docs/models/seekstreamoptions.md
-  - docs/models/seekstreamparams.md
-  - docs/models/seekstreampersonalize.md
-  - docs/models/seekstreamrequestbody.md
-  - docs/models/seekstreamresponsebody.md
-  - docs/models/seekstreamsystem.md
-  - docs/models/seekstreamusersession.md
   - docs/models/sentences.md
   - docs/models/slots.md
   - docs/models/system.md
@@ -172,7 +151,6 @@ generatedFiles:
   - src/neuralseek/models/identifylanguagejsonop.py
   - src/neuralseek/models/identifylanguageop.py
   - src/neuralseek/models/logsop.py
-  - src/neuralseek/models/maistro_streamop.py
   - src/neuralseek/models/maistroop.py
   - src/neuralseek/models/otpop.py
   - src/neuralseek/models/piiop.py
@@ -181,7 +159,6 @@ generatedFiles:
   - src/neuralseek/models/security.py
   - src/neuralseek/models/seek.py
   - src/neuralseek/models/seek_response.py
-  - src/neuralseek/models/seek_streamop.py
   - src/neuralseek/models/test_jsonop.py
   - src/neuralseek/models/test_multipartop.py
   - src/neuralseek/models/trainop.py
@@ -220,22 +197,24 @@ generatedFiles:
   - src/neuralseek/utils/url.py
   - src/neuralseek/utils/values.py
 examples:
-  seek:
-    speakeasy-default-seek:
-      responses:
-        "200":
-          application/json: {"score": 890691}
-  seek_stream: {}
+  seek: {}
   categorize: {}
-  maistro: {}
-  maistro_stream: {}
+  maistro:
+    speakeasy-default-maistro:
+      parameters:
+        query:
+          overrideschema: ""
+          overrideagent: ""
+          debug: ""
+      requestBody:
+        application/json: {"ntl": "", "agent": ""}
   ExtractEntities:
     speakeasy-default-extract-entities:
       requestBody:
         application/json: {"entities": "[{\"name\":\"dog-breeds\",\"description\":\"Types of Dogs\", \"format\":\"string\"}]"}
       responses:
         "200":
-          application/json: {}
+          application/json: {"complete": false}
   Translate: {}
   translateGlossary: {}
   deleteTranslateGlossary: {}
@@ -243,9 +222,6 @@ examples:
     speakeasy-default-identify-language:
       requestBody:
         text/plain: ""
-      responses:
-        "200":
-          application/json: []
   IdentifyLanguageJSON: {}
   pii: {}
   rate: {}
@@ -260,4 +236,5 @@ examples:
   otp: {}
   deleteUserData: {}
   keycheck: {}
+examplesVersion: 1.0.0
 generatedTests: {}

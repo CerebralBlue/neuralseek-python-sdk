@@ -5,6 +5,6 @@
 NeuralSeek: NeuralSeek - The business LLM accelerator
 
 Documentation
-<https://neuralseek.com/documentation>
+<https://documentation.neuralseek.com>
 
 ### Available Operations

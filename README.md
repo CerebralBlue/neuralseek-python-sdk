@@ -15,7 +15,7 @@ Developer-friendly & type-safe Python SDK specifically catered to leverage *neur
 
 NeuralSeek: NeuralSeek - The business LLM accelerator
 
-For more information about the API: [Documentation](https://neuralseek.com/documentation)
+For more information about the API: [Documentation](https://documentation.neuralseek.com)
 <!-- End Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->
@@ -27,12 +27,12 @@ For more information about the API: [Documentation](https://neuralseek.com/docum
   * [SDK Example Usage](#sdk-example-usage)
   * [Authentication](#authentication)
   * [Available Resources and Operations](#available-resources-and-operations)
-  * [Server-sent event streaming](#server-sent-event-streaming)
   * [File uploads](#file-uploads)
   * [Retries](#retries)
   * [Error Handling](#error-handling)
   * [Server Selection](#server-selection)
   * [Custom HTTP Client](#custom-http-client)
+  * [Resource Management](#resource-management)
   * [Debugging](#debugging)
 * [Development](#development)
   * [Maturity](#maturity)
@@ -42,6 +42,11 @@ For more information about the API: [Documentation](https://neuralseek.com/docum
 
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
+
+> [!NOTE]
+> **Python version upgrade policy**
+>
+> Once a Python version reaches its [official end of life date](https://devguide.python.org/versions/), a 3-month grace period is provided for users to upgrade. Following this grace period, the minimum python version supported in the SDK will be updated.
 
 The SDK can be installed with either *pip* or *poetry* package managers.
 
@@ -60,6 +65,37 @@ pip install neuralseek
 ```bash
 poetry add neuralseek
 ```
+
+### Shell and script usage with `uv`
+
+You can use this SDK in a Python shell with [uv](https://docs.astral.sh/uv/) and the `uvx` command that comes with it like so:
+
+```shell
+uvx --from neuralseek python
+```
+
+It's also possible to write a standalone Python script without needing to set up a whole project like so:
+
+```python
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.9"
+# dependencies = [
+#     "neuralseek",
+# ]
+# ///
+
+from neuralseek import Neuralseek
+
+sdk = Neuralseek(
+  # SDK arguments
+)
+
+# Rest of script here...
+```
+
+Once that is saved to a file, you can run it with `uv run script.py` where
+`script.py` can be replaced with the actual file name.
 <!-- End SDK Installation [installation] -->
 
 <!-- Start IDE Support [idesupport] -->
@@ -84,12 +120,12 @@ import os
 
 with Neuralseek(
     api_key=os.getenv("NEURALSEEK_API_KEY", ""),
-) as s:
-    res = s.seek.execute()
+) as n_client:
 
-    if res is not None:
-        # handle response
-        pass
+    res = n_client.seek.execute()
+
+    # Handle response
+    print(res)
 ```
 
 </br>
@@ -104,12 +140,12 @@ import os
 async def main():
     async with Neuralseek(
         api_key=os.getenv("NEURALSEEK_API_KEY", ""),
-    ) as s:
-        res = await s.seek.execute_async()
+    ) as n_client:
 
-        if res is not None:
-            # handle response
-            pass
+        res = await n_client.seek.execute_async()
+
+        # Handle response
+        print(res)
 
 asyncio.run(main())
 ```
@@ -133,12 +169,12 @@ import os
 
 with Neuralseek(
     api_key=os.getenv("NEURALSEEK_API_KEY", ""),
-) as s:
-    res = s.seek.execute()
+) as n_client:
 
-    if res is not None:
-        # handle response
-        pass
+    res = n_client.seek.execute()
+
+    # Handle response
+    print(res)
 
 ```
 <!-- End Authentication [security] -->
@@ -187,8 +223,7 @@ with Neuralseek(
 
 ### [maistro](docs/sdks/maistro/README.md)
 
-* [execute](docs/sdks/maistro/README.md#execute) - Run mAistro NTL or template
-* [stream](docs/sdks/maistro/README.md#stream) - Stream mAIstro NTL or a template
+* [execute](docs/sdks/maistro/README.md#execute) - Run mAistro NTL or agent
 
 
 ### [one_time_password](docs/sdks/onetimepassword/README.md)
@@ -206,7 +241,6 @@ with Neuralseek(
 ### [seek](docs/sdks/seeksdk/README.md)
 
 * [execute](docs/sdks/seeksdk/README.md#execute) - Seek an answer from NeuralSeek
-* [stream](docs/sdks/seeksdk/README.md#stream) - Stream a Seek an answer from NeuralSeek
 
 ### [service_test](docs/sdks/servicetest/README.md)
 
@@ -242,40 +276,6 @@ with Neuralseek(
 </details>
 <!-- End Available Resources and Operations [operations] -->
 
-<!-- Start Server-sent event streaming [eventstream] -->
-## Server-sent event streaming
-
-[Server-sent events][mdn-sse] are used to stream content from certain
-operations. These operations will expose the stream as [Generator][generator] that
-can be consumed using a simple `for` loop. The loop will
-terminate when the server no longer has any events to send and closes the
-underlying connection.  
-
-The stream is also a [Context Manager][context-manager] and can be used with the `with` statement and will close the
-underlying connection when the context is exited.
-
-```python
-from neuralseek import Neuralseek
-import os
-
-with Neuralseek(
-    api_key=os.getenv("NEURALSEEK_API_KEY", ""),
-) as s:
-    res = s.seek.stream()
-
-    if res is not None:
-        with res as event_stream:
-            for event in event_stream:
-                # handle event
-                print(event, flush=True)
-
-```
-
-[mdn-sse]: https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events
-[generator]: https://book.pythontips.com/en/latest/generators.html
-[context-manager]: https://book.pythontips.com/en/latest/context_managers.html
-<!-- End Server-sent event streaming [eventstream] -->
-
 <!-- Start File uploads [file-upload] -->
 ## File uploads
 
@@ -292,8 +292,9 @@ import os
 
 with Neuralseek(
     api_key=os.getenv("NEURALSEEK_API_KEY", ""),
-) as s:
-    s.translation_glossary.add_multipart()
+) as n_client:
+
+    n_client.translation_glossary.add_multipart()
 
     # Use the SDK ...
 
@@ -313,13 +314,13 @@ import os
 
 with Neuralseek(
     api_key=os.getenv("NEURALSEEK_API_KEY", ""),
-) as s:
-    res = s.seek.execute(,
+) as n_client:
+
+    res = n_client.seek.execute(,
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
-    if res is not None:
-        # handle response
-        pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -332,12 +333,12 @@ import os
 with Neuralseek(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
     api_key=os.getenv("NEURALSEEK_API_KEY", ""),
-) as s:
-    res = s.seek.execute()
+) as n_client:
 
-    if res is not None:
-        # handle response
-        pass
+    res = n_client.seek.execute()
+
+    # Handle response
+    print(res)
 
 ```
 <!-- End Retries [retries] -->
@@ -370,14 +371,14 @@ import os
 
 with Neuralseek(
     api_key=os.getenv("NEURALSEEK_API_KEY", ""),
-) as s:
+) as n_client:
     res = None
     try:
-        res = s.seek.execute()
 
-        if res is not None:
-            # handle response
-            pass
+        res = n_client.seek.execute()
+
+        # Handle response
+        print(res)
 
     except models.APIError as e:
         # handle exception
@@ -391,11 +392,32 @@ with Neuralseek(
 ### Server Variables
 
 The default server `https://api.neuralseek.com/v1/{instance}` contains variables and is set to `https://api.neuralseek.com/v1/demo` by default. To override default values, the following parameters are available when initializing the SDK client instance:
- * `instance: str`
+
+| Variable   | Parameter       | Default  | Description      |
+| ---------- | --------------- | -------- | ---------------- |
+| `instance` | `instance: str` | `"demo"` | Your instance ID |
+
+#### Example
+
+```python
+from neuralseek import Neuralseek
+import os
+
+with Neuralseek(
+    instance="<value>"
+    api_key=os.getenv("NEURALSEEK_API_KEY", ""),
+) as n_client:
+
+    res = n_client.seek.execute()
+
+    # Handle response
+    print(res)
+
+```
 
 ### Override Server URL Per-Client
 
-The default server can also be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
+The default server can be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
 ```python
 from neuralseek import Neuralseek
 import os
@@ -403,12 +425,12 @@ import os
 with Neuralseek(
     server_url="https://api.neuralseek.com/v1/demo",
     api_key=os.getenv("NEURALSEEK_API_KEY", ""),
-) as s:
-    res = s.seek.execute()
+) as n_client:
 
-    if res is not None:
-        # handle response
-        pass
+    res = n_client.seek.execute()
+
+    # Handle response
+    print(res)
 
 ```
 <!-- End Server Selection [server] -->
@@ -493,6 +515,32 @@ class CustomClient(AsyncHttpClient):
 s = Neuralseek(async_client=CustomClient(httpx.AsyncClient()))
 ```
 <!-- End Custom HTTP Client [http-client] -->
+
+<!-- Start Resource Management [resource-management] -->
+## Resource Management
+
+The `Neuralseek` class implements the context manager protocol and registers a finalizer function to close the underlying sync and async HTTPX clients it uses under the hood. This will close HTTP connections, release memory and free up other resources held by the SDK. In short-lived Python programs and notebooks that make a few SDK method calls, resource management may not be a concern. However, in longer-lived programs, it is beneficial to create a single SDK instance via a [context manager][context-manager] and reuse it across the application.
+
+[context-manager]: https://docs.python.org/3/reference/datamodel.html#context-managers
+
+```python
+from neuralseek import Neuralseek
+import os
+def main():
+    with Neuralseek(
+        api_key=os.getenv("NEURALSEEK_API_KEY", ""),
+    ) as n_client:
+        # Rest of application here...
+
+
+# Or when using async:
+async def amain():
+    async with Neuralseek(
+        api_key=os.getenv("NEURALSEEK_API_KEY", ""),
+    ) as n_client:
+        # Rest of application here...
+```
+<!-- End Resource Management [resource-management] -->
 
 <!-- Start Debugging [debug] -->
 ## Debugging

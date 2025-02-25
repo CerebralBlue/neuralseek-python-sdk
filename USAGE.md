@@ -6,12 +6,12 @@ import os
 
 with Neuralseek(
     api_key=os.getenv("NEURALSEEK_API_KEY", ""),
-) as s:
-    res = s.seek.execute()
+) as n_client:
 
-    if res is not None:
-        # handle response
-        pass
+    res = n_client.seek.execute()
+
+    # Handle response
+    print(res)
 ```
 
 </br>
@@ -26,12 +26,12 @@ import os
 async def main():
     async with Neuralseek(
         api_key=os.getenv("NEURALSEEK_API_KEY", ""),
-    ) as s:
-        res = await s.seek.execute_async()
+    ) as n_client:
 
-        if res is not None:
-            # handle response
-            pass
+        res = await n_client.seek.execute_async()
+
+        # Handle response
+        print(res)
 
 asyncio.run(main())
 ```

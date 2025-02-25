@@ -19,12 +19,12 @@ import os
 
 with Neuralseek(
     api_key=os.getenv("NEURALSEEK_API_KEY", ""),
-) as s:
-    res = s.one_time_password.create()
+) as n_client:
 
-    if res is not None:
-        # handle response
-        pass
+    res = n_client.one_time_password.create()
+
+    # Handle response
+    print(res)
 
 ```
 

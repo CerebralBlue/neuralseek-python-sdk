@@ -21,7 +21,7 @@ class TestMultipartFile(BaseModel):
     __test__ = False
 
     file_name: Annotated[
-        str, pydantic.Field(alias="file"), FieldMetadata(multipart=True)
+        str, pydantic.Field(alias="fileName"), FieldMetadata(multipart=True)
     ]
 
     content: Annotated[
@@ -52,6 +52,5 @@ class TestMultipartRequestBody(BaseModel):
 
     file: Annotated[
         Optional[TestMultipartFile],
-        pydantic.Field(alias=""),
         FieldMetadata(multipart=MultipartFormMetadata(file=True)),
     ] = None

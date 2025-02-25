@@ -19,8 +19,9 @@ import os
 
 with Neuralseek(
     api_key=os.getenv("NEURALSEEK_API_KEY", ""),
-) as s:
-    s.user_data.delete()
+) as n_client:
+
+    n_client.user_data.delete()
 
     # Use the SDK ...
 

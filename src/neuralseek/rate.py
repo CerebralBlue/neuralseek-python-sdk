@@ -5,7 +5,7 @@ from neuralseek import models, utils
 from neuralseek._hooks import HookContext
 from neuralseek.types import BaseModel, OptionalNullable, UNSET
 from neuralseek.utils import get_security_from_env
-from typing import Optional, Union, cast
+from typing import Mapping, Optional, Union, cast
 
 
 class Rate(BaseSDK):
@@ -18,6 +18,7 @@ class Rate(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
     ):
         r"""Rate an answer
 
@@ -27,6 +28,7 @@ class Rate(BaseSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
         url_variables = None
@@ -35,12 +37,14 @@ class Rate(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(request, models.RateRequestBody)
         request = cast(models.RateRequestBody, request)
 
-        req = self.build_request(
+        req = self._build_request(
             method="POST",
             path="/rate",
             base_url=base_url,
@@ -51,6 +55,7 @@ class Rate(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="*/*",
+            http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, True, "json", Optional[models.RateRequestBody]
@@ -68,6 +73,7 @@ class Rate(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="rate",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -81,7 +87,12 @@ class Rate(BaseSDK):
 
         if utils.match_response(http_res, "200", "*"):
             return
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -105,6 +116,7 @@ class Rate(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
     ):
         r"""Rate an answer
 
@@ -114,6 +126,7 @@ class Rate(BaseSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
         url_variables = None
@@ -122,12 +135,14 @@ class Rate(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(request, models.RateRequestBody)
         request = cast(models.RateRequestBody, request)
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="POST",
             path="/rate",
             base_url=base_url,
@@ -138,6 +153,7 @@ class Rate(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="*/*",
+            http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, True, "json", Optional[models.RateRequestBody]
@@ -155,6 +171,7 @@ class Rate(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="rate",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -168,7 +185,12 @@ class Rate(BaseSDK):
 
         if utils.match_response(http_res, "200", "*"):
             return
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
